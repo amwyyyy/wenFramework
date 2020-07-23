@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%p][%d{ISO8601}][%c][%m]%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="debug" />
+			<param name="LevelMax" value="error" />
+			<param name="acceptOnMatch" value="true" />
+		</filter>
+	</appender>
+
+	<!--other info log file -->
+	<appender name="OTHER_INFO" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="../logs/info.log" />
+		<param name="MaxBackupIndex" value="300" />
+		<param name="Encoding" value="GBK" />
+		<param name="MaxFileSize" value="20MB" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{ISO8601} %p [%c] - [%m]%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="debug" />
+			<param name="LevelMax" value="error" />
+			<param name="acceptOnMatch" value="true" />
+		</filter>
+	</appender>
+
+	<root>
+		<level value="debug" />
+		<appender-ref ref="OTHER_INFO" />
+		<appender-ref ref="CONSOLE" />
+	</root>
+</log4j:configuration>
